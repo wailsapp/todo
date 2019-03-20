@@ -1,0 +1,17 @@
+{
+ "name": "Todo",
+ "description": "Enter your project description",
+ "author": {
+  "name": "Lea",
+  "email": "l@l.com"
+ },
+ "version": "0.1.0",
+ "binaryname": "todo",
+ "frontend": {
+  "dir": "frontend",
+  "install": "npm install",
+  "build": "npm run build",
+  "bridge": "src",
+  "serve": "npm run serve"
+ }
+}
