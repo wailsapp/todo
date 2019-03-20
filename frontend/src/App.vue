@@ -39,16 +39,25 @@
           </li>
         </ul>
       </section>
-      <footer class="footer" v-show="todos.length">
+      <footer class="footer">
         <span class="todo-count">
           <strong v-text="remaining"></strong>
           {{pluralize('item', remaining)}} left
         </span>
         <button
           class="clear-completed"
+          @click="load"
+        >Load</button>
+        <button
+          class="clear-completed"
           @click="removeCompleted"
           v-show="todos.length > remaining"
         >Clear completed</button>
+      <button
+          class="clear-completed"
+          @click="saveAs"
+          v-show="todos.length > 0"
+        >Save As</button>
       </footer>
     </section>
   </div>
@@ -169,7 +178,15 @@ export default {
 
     removeCompleted: function() {
       this.todos = filters.active(this.todos);
-    }
+    },
+
+    saveAs: function() {
+      todoStorage.saveAs(this.todos);
+    },
+
+    load: async function() {
+      this.todos = await todoStorage.loadTodosFromFile();
+    },
   },
   mounted() {
     var self = this;

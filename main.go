@@ -1,9 +1,7 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
-	"os"
 	"path/filepath"
 
 	"github.com/leaanthony/mewn"
@@ -12,22 +10,6 @@ import (
 )
 
 var filename string
-
-func loadTodos() (string, error) {
-	result := "[]"
-	if _, err := os.Stat(filename); !os.IsNotExist(err) {
-		data, err := ioutil.ReadFile(filename)
-		if err != nil {
-			return "[]", err
-		}
-		result = string(data)
-	}
-	return result, nil
-}
-
-func save(todos string) error {
-	return ioutil.WriteFile(filename, []byte(todos), 0755)
-}
 
 func main() {
 
@@ -50,7 +32,9 @@ func main() {
 		CSS:       css,
 		Colour:    "rgb(245, 245, 245)",
 	})
-	app.Bind(loadTodos)
-	app.Bind(save)
+
+	todoStruct := &Todos{}
+
+	app.Bind(todoStruct)
 	app.Run()
 }
