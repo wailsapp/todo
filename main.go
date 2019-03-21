@@ -1,24 +1,11 @@
 package main
 
 import (
-	"log"
-	"path/filepath"
-
 	"github.com/leaanthony/mewn"
-	homedir "github.com/mitchellh/go-homedir"
 	"github.com/wailsapp/wails"
 )
 
-var filename string
-
 func main() {
-
-	homeDirectory, err := homedir.Dir()
-	if err != nil {
-		log.Fatal("Cannot find home directory! Please file a bug report!")
-	}
-
-	filename = filepath.Join(homeDirectory, "todos.json")
 
 	js := mewn.String("./frontend/dist/app.js")
 	css := mewn.String("./frontend/dist/app.css")
