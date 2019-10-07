@@ -55,6 +55,9 @@
 <script>
 import "./assets/css/base.css";
 import "./assets/css/app.css";
+
+import Wails from '@wailsapp/runtime';
+
 export default {
   name: "app",
   data() {
@@ -155,11 +158,11 @@ export default {
     }
   },
   mounted() {
-    window.wails.events.on("filemodified", () => {
+    Wails.Events.On("filemodified", () => {
       this.loadList();
     });
 
-    window.wails.events.on("error", (message, number) => {
+    Wails.Events.On("error", (message, number) => {
       let result = number * 2;
       this.setErrorMessage(`${message}: ${result}`);
     });
